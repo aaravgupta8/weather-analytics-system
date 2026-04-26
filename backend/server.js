@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3000;
 // ─── Middleware ────────────────────────────────────────────────────────────────
 app.use(cors());                          // Allow cross-origin requests (frontend <-> backend)
 app.use(express.json());                  // Parse JSON request bodies
-app.use(express.static(path.join(__dirname, "../frontend"))); // Serve frontend files
+app.use(express.static(path.join(__dirname, "../../frontend"))); // Serve frontend files
 
 // ─── Route: GET /cities ────────────────────────────────────────────────────────
 // Returns all cities from the city table
@@ -201,7 +201,7 @@ app.delete("/weather/:id", async (req, res) => {
 
 // ─── Root route serves the frontend ──────────────────────────────────────────
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/index.html"));
+  res.sendFile(path.join(__dirname, "../../frontend/index.html"));
 });
 
 // ─── Start Server ─────────────────────────────────────────────────────────────
