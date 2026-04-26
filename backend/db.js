@@ -9,6 +9,7 @@ const pool = mysql.createPool({
   user: process.env.DB_USER || "root",
   password: process.env.DB_PASSWORD || "",
   database: process.env.DB_NAME || "dailyweatherdb",
+  port: process.env.DB_PORT || 3306,  // add this
   waitForConnections: true,
   connectionLimit: 10,   // max 10 simultaneous connections
   queueLimit: 0,
