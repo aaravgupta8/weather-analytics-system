@@ -1,4 +1,4 @@
-const API = "http://localhost:3000";
+const API = "weather-analytics-system-production.up.railway.app";
 
 // ─── On Page Load ─────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
