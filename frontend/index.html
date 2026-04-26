@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>India Weather Analytics</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────────────────── -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">⛅</span>
+        <div>
+          <h1>India Weather Analytics</h1>
+          <p>Daily data across 10 cities · 2000–2024</p>
+        </div>
+      </div>
+      <div class="header-badge">Historical Weather Data Analysis for Indian Cities</div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ── Filters Panel ─────────────────────────────────────────── -->
+    <section class="panel filters-panel">
+      <h2 class="panel-title">🔍 Filters</h2>
+      <div class="filters-grid">
+        <div class="form-group">
+          <label for="citySelect">City</label>
+          <select id="citySelect">
+            <option value="">All Cities</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="startDate">From Date</label>
+          <input type="date" id="startDate" value="2023-01-01" />
+        </div>
+        <div class="form-group">
+          <label for="endDate">To Date</label>
+          <input type="date" id="endDate" value="2023-12-31" />
+        </div>
+        <div class="form-group">
+          <label for="limitSelect">Records to show</label>
+          <select id="limitSelect">
+            <option value="50">50</option>
+            <option value="100" selected>100</option>
+            <option value="200">200</option>
+            <option value="500">500</option>
+          </select>
+        </div>
+      </div>
+      <div class="filter-actions">
+        <button class="btn btn-primary" onclick="fetchWeather()">Fetch Weather Data</button>
+        <button class="btn btn-secondary" onclick="fetchAnalytics()">Show Analytics</button>
+        <button class="btn btn-reset" onclick="resetFilters()">Reset</button>
+      </div>
+    </section>
+
+    <!-- ── Analytics Cards ───────────────────────────────────────── -->
+    <section class="panel analytics-panel" id="analyticsSection" style="display:none">
+      <h2 class="panel-title">📊 Analytics Summary</h2>
+      <div id="analyticsCards" class="analytics-cards"></div>
+    </section>
+
+    <!-- ── Add Record Form ───────────────────────────────────────── -->
+    <section class="panel add-panel">
+      <h2 class="panel-title">➕ Add Weather Record</h2>
+      <div class="add-form-grid">
+        <div class="form-group">
+          <label>City</label>
+          <select id="addCity"></select>
+        </div>
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" id="addDate" />
+        </div>
+        <div class="form-group">
+          <label>Max Temp (°C)</label>
+          <input type="number" id="addTempMax" step="0.1" placeholder="e.g. 35.2" />
+        </div>
+        <div class="form-group">
+          <label>Min Temp (°C)</label>
+          <input type="number" id="addTempMin" step="0.1" placeholder="e.g. 22.1" />
+        </div>
+        <div class="form-group">
+          <label>Apparent Max Temp</label>
+          <input type="number" id="addApparentMax" step="0.1" placeholder="e.g. 38.0" />
+        </div>
+        <div class="form-group">
+          <label>Apparent Min Temp</label>
+          <input type="number" id="addApparentMin" step="0.1" placeholder="e.g. 20.0" />
+        </div>
+        <div class="form-group">
+          <label>Precipitation (mm)</label>
+          <input type="number" id="addPrecip" step="0.1" placeholder="e.g. 12.5" />
+        </div>
+        <div class="form-group">
+          <label>Rain Sum (mm)</label>
+          <input type="number" id="addRain" step="0.1" placeholder="e.g. 10.0" />
+        </div>
+        <div class="form-group">
+          <label>Max Wind Speed</label>
+          <input type="number" id="addWind" step="0.1" placeholder="e.g. 25.0" />
+        </div>
+        <div class="form-group">
+          <label>Max Wind Gust</label>
+          <input type="number" id="addGust" step="0.1" placeholder="e.g. 40.0" />
+        </div>
+        <div class="form-group">
+          <label>Wind Direction</label>
+          <input type="text" id="addWindDir" placeholder="e.g. 180" />
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="addRecord()">Add Record</button>
+      <span id="addMsg" class="msg"></span>
+    </section>
+
+    <!-- ── Weather Data Table ────────────────────────────────────── -->
+    <section class="panel table-panel" id="tableSection" style="display:none">
+      <div class="table-header">
+        <h2 class="panel-title">🌡️ Weather Records</h2>
+        <span id="recordCount" class="record-count"></span>
+      </div>
+      <div class="table-wrapper">
+        <table id="weatherTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Date</th>
+              <th>City</th>
+              <th>Max Temp</th>
+              <th>Min Temp</th>
+              <th>App. Max</th>
+              <th>App. Min</th>
+              <th>Precip.</th>
+              <th>Rain</th>
+              <th>Wind Max</th>
+              <th>Gusts</th>
+              <th>Wind Dir</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody id="weatherTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Toast Notification ──────────────────────────────────────── -->
+  <div id="toast" class="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
