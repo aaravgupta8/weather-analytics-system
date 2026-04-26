@@ -1,4 +1,4 @@
-const API = "weather-analytics-system-production.up.railway.app";
+const API = "https://weather-analytics-system-production.up.railway.app";
 
 // ─── On Page Load ─────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {

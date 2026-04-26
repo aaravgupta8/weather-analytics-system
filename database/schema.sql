@@ -1,22 +1,12 @@
--- =============================================
--- Daily Weather Analytics System - Schema
--- =============================================
+-- Remove these two lines if present:
+-- CREATE DATABASE IF NOT EXISTS weather_db;
+-- USE weather_db;
 
--- Create and select the database
-CREATE DATABASE IF NOT EXISTS weather_db;
-USE weather_db;
-
--- -------------------------
--- Table: city
--- -------------------------
 CREATE TABLE IF NOT EXISTS city (
     city_id INT AUTO_INCREMENT PRIMARY KEY,
     city_name VARCHAR(100) NOT NULL
 );
 
--- -------------------------
--- Table: daily_weather
--- -------------------------
 CREATE TABLE IF NOT EXISTS daily_weather (
     weather_id INT AUTO_INCREMENT PRIMARY KEY,
     date DATE NOT NULL,
@@ -26,6 +16,7 @@ CREATE TABLE IF NOT EXISTS daily_weather (
     apparent_temperature_min FLOAT,
     precipitation_sum FLOAT,
     rain_sum FLOAT,
+    weather_code VARCHAR(10),
     wind_speed_10m_max FLOAT,
     wind_gusts_10m_max FLOAT,
     wind_direction_10m_dominant VARCHAR(10),
