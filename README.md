@@ -1,8 +1,7 @@
 # ⛅ India Daily Weather Analytics System
+### DBMS Mini Project | MySQL + Node.js + HTML/CSS/JS
 
-A full-stack web application for exploring and analyzing daily weather data across 10 major Indian cities from 2000–2024.
-
-Built as a DBMS Mini Project using **MySQL**, **Node.js/Express**, and **HTML/CSS/JS**.
+🔗 **Live Demo**: https://weather-analytics-system-production.up.railway.app
 
 ---
 
@@ -12,7 +11,8 @@ Built as a DBMS Mini Project using **MySQL**, **Node.js/Express**, and **HTML/CS
 |-------|-----------|
 | Frontend | HTML, CSS, JavaScript |
 | Backend | Node.js, Express |
-| Database | MySQL |
+| Database | MySQL (hosted on Railway) |
+| Deployment | Railway |
 
 ---
 
@@ -29,24 +29,29 @@ weather-app/
 │   ├── index.html         ← Main UI
 │   ├── style.css          ← Stylesheet
 │   └── app.js             ← API calls & UI logic
-└── database/
-    ├── schema.sql         ← CREATE TABLE statements
-    └── import_data.py     ← Generates seed SQL from CSV dataset
+├── database/
+│   ├── schema.sql         ← CREATE TABLE statements
+│   └── import_data.py     ← Generates seed SQL from CSV dataset
+├── railway.json           ← Railway deployment config
+└── package.json           ← Root package.json for Railway
 ```
 
 ---
 
-## ⚙️ Setup & Installation
+## ⚙️ Local Setup
 
 ### Prerequisites
 - Node.js v16+
 - MySQL v8+
 - Python 3
 
----
+### Step 1 — Clone the repo
+```bash
+git clone https://github.com/aaravgupta8/weather-analytics-system.git
+cd weather-analytics-system
+```
 
-### Step 1 — Create the Database
-
+### Step 2 — Create the Database
 ```bash
 mysql -u root -p
 ```
@@ -54,28 +59,18 @@ mysql -u root -p
 source database/schema.sql
 ```
 
----
-
-### Step 2 — Import the Dataset
-
-Download the dataset CSV and place it at `data/weather_data.csv`, then:
-
+### Step 3 — Import the Dataset
+Place the CSV at `data/weather_data.csv` then:
 ```bash
-python3 database/import_data.py
+python database/import_data.py
 mysql -u root -p weather_db < database/seed_data.sql
 ```
 
-> Inserts ~91,000 rows — may take 1–3 minutes.
-
----
-
-### Step 3 — Configure Environment
-
+### Step 4 — Configure Environment
 ```bash
 cd backend
 cp .env.example .env
 ```
-
 Edit `.env`:
 ```
 DB_HOST=localhost
@@ -85,17 +80,13 @@ DB_NAME=weather_db
 PORT=3000
 ```
 
----
-
-### Step 4 — Install & Run
-
+### Step 5 — Install & Run
 ```bash
 cd backend
 npm install
 npm start
 ```
-
-Open **http://localhost:3000** in your browser.
+Open **http://localhost:3000**
 
 ---
 
@@ -109,11 +100,11 @@ Open **http://localhost:3000** in your browser.
 | POST | `/weather` | Add a new weather record |
 | DELETE | `/weather/:id` | Delete a record by ID |
 
-### Supported Query Parameters (`/weather`, `/analytics`)
+### Query Parameters (`/weather`, `/analytics`)
 - `city_id` — filter by city
 - `start_date` — e.g. `2023-01-01`
 - `end_date` — e.g. `2023-12-31`
-- `limit` — max rows returned (default: 100)
+- `limit` — max rows returned (default: 100, `/weather` only)
 
 ---
 
@@ -135,3 +126,11 @@ Open **http://localhost:3000** in your browser.
 - **Period**: 2000–2024 (daily records)
 - **Total rows**: ~91,300
 - **Source**: Open-Meteo Historical Weather API
+
+---
+
+## ☁️ Deployment (Railway)
+
+- Backend + MySQL both hosted on [Railway](https://railway.app)
+- Auto-deploys on every `git push` to main
+- Environment variables configured in Railway dashboard
