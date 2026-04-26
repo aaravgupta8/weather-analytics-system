@@ -1,0 +1,14 @@
+{
+  "name": "weather-analytics-system",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node backend/server.js",
+    "install": "cd backend && npm install"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mysql2": "^3.6.0"
+  }
+}
