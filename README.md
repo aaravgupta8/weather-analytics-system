@@ -33,6 +33,7 @@ weather-app/
 │   ├── schema.sql         ← CREATE TABLE statements
 │   └── import_data.py     ← Generates seed SQL from CSV dataset
 ├── railway.json           ← Railway deployment config
+├── data/                  ← Dataset CSV
 └── package.json           ← Root package.json for Railway
 ```
 
